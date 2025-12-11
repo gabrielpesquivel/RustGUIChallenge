@@ -8,4 +8,5 @@ This project is my first introduction to both Rust and GUI's. I like to learn on
 2. No VSCode, must be written in Neovim.
 3. Rust only.
 
-Check back in for features and updates :)
+### What am I building
+I want to build a tool to help kick start my mornings. What does that look like? Not entirely sure yet.
