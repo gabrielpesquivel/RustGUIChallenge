@@ -5,6 +5,7 @@ pub struct TemplateApp {
     had_breakfast: bool,
     has_brushed_teeth: bool,
     has_meditated: bool,
+    agenda: String,
 }
 
 impl Default for TemplateApp {
@@ -13,6 +14,7 @@ impl Default for TemplateApp {
             had_breakfast: false,
             has_brushed_teeth: false,
             has_meditated: false,
+            agenda: String::from(""),
         }
     }
 }
@@ -75,7 +77,13 @@ impl eframe::App for TemplateApp {
             ui.checkbox(&mut self.had_breakfast, "Breakfast");
             ui.checkbox(&mut self.has_brushed_teeth, "Brush teeth");
             ui.checkbox(&mut self.has_meditated, "3 mins 30s of meditation");
-
+           
+            ui.spacing_mut().item_spacing.y = 10.0;
+            ui.vertical_centered(|ui| {
+                ui.label(egui::RichText::new("What's on the agenda for today?").size(14.0));
+                ui.text_edit_multiline(&mut self.agenda);
+            });
+            
             ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
                 powered_by_egui_and_eframe(ui);
             });
