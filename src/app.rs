@@ -6,6 +6,7 @@ pub struct TemplateApp {
     has_brushed_teeth: bool,
     has_meditated: bool,
     agenda: String,
+    streak: i32,
 }
 
 impl Default for TemplateApp {
@@ -15,6 +16,7 @@ impl Default for TemplateApp {
             has_brushed_teeth: false,
             has_meditated: false,
             agenda: String::from(""),
+            streak: 0,
         }
     }
 }
@@ -83,6 +85,11 @@ impl eframe::App for TemplateApp {
                 ui.label(egui::RichText::new("What's on the agenda for today?").size(14.0));
                 ui.text_edit_multiline(&mut self.agenda);
             });
+
+            ui.vertical_centered(|ui| {
+                ui.label(egui::RichText::new("Streak Counter:").size(14.0));
+                ui_counter(ui, &mut self.streak);
+            });
             
             ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
                 powered_by_egui_and_eframe(ui);
@@ -102,5 +109,17 @@ fn powered_by_egui_and_eframe(ui: &mut egui::Ui) {
             "https://github.com/emilk/egui/tree/master/crates/eframe",
         );
         ui.label(".");
+    });
+}
+
+fn ui_counter(ui: &mut egui::Ui, counter: &mut i32) { 
+    ui.vertical_centered(|ui| {
+            if ui.button("+").clicked() {
+                *counter += 1;
+            }
+            ui.label(counter.to_string());
+            if ui.button("-").clicked() {
+                *counter -= 1;
+            }
     });
 }
